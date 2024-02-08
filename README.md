@@ -1,0 +1,1 @@
+# munhos-magazine-service
