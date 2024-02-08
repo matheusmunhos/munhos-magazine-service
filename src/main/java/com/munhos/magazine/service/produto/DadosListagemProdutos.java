@@ -1,8 +1,8 @@
 package com.munhos.magazine.service.produto;
 
-public record DadosListagemProdutos(String nome,Integer quantidade,Double valor,String tipoProduto) {
+public record DadosListagemProdutos(String nome,Integer quantidade,Double valor,String tipoProduto, Long id) {
 
 	public DadosListagemProdutos(Produto produto) {
-		this(produto.getNome(), produto.getQuantidade(), produto.getValor(),produto.getTipoProduto());
+		this(produto.getNome(), produto.getQuantidade(), produto.getValor(),produto.getTipoProduto(), produto.getId());
 	}
 }

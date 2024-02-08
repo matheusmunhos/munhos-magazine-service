@@ -35,4 +35,23 @@ public class Produto {
 		this.tipoProduto = dados.tipoProduto();
 		this.quantidade = dados.quantidade();
 	}
+
+
+
+	public void atualizarInformacoes(DadosAtualizacaoProduto dados) {
+		
+		if (dados.nome() != null) {
+			this.nome = dados.nome();			
+		} 
+		if (dados.quantidade() != null) {
+			this.quantidade = dados.quantidade();
+		}
+		if (dados.valor() != null) {
+			this.valor = dados.valor();
+		}
+		if (dados.tipoProduto() != null) {
+			this.tipoProduto = dados.tipoProduto();
+		}
+		
+	}
 }

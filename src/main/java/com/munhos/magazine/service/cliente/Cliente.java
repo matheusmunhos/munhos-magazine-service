@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cliente {
-	
+
 	@Id
 	private Long cpf;
 
@@ -23,8 +23,6 @@ public class Cliente {
 	private String email;
 	private String telefone;
 	private Endereco endereco;
-	
-
 
 	public Cliente(DadosCadastroCliente dados) {
 		this.nome = dados.nome();
@@ -32,5 +30,23 @@ public class Cliente {
 		this.email = dados.email();
 		this.telefone = dados.telefone();
 		this.endereco = new Endereco(dados.endereco());
+	}
+
+	public void atualizarInformacoes(DadosAtualicaoCliente dados) {
+
+		if(dados.email() != null) {
+			this.email = dados.email();
+		} 
+		if(dados.nome() != null) {
+			this.nome = dados.nome();
+		}
+		if (dados.telefone() != null) {
+			this.telefone = dados.telefone();
+		}
+		if (dados.endereco() != null) {
+			this.endereco.atualizarInformacoes(dados.endereco());
+		}
+	
+
 	}
 }
