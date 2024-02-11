@@ -1,0 +1,1 @@
+alter table administradores add login varchar(100);
