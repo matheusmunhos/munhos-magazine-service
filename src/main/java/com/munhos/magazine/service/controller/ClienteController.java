@@ -6,17 +6,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.munhos.magazine.service.cliente.Cliente;
 import com.munhos.magazine.service.cliente.ClienteRepository;
 import com.munhos.magazine.service.cliente.DadosAtualicaoCliente;
 import com.munhos.magazine.service.cliente.DadosCadastroCliente;
+import com.munhos.magazine.service.cliente.DadosDetalhamentoCliente;
 import com.munhos.magazine.service.cliente.DadosListagemClientes;
 
 import jakarta.transaction.Transactional;
@@ -30,26 +34,45 @@ public class ClienteController {
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity<String> cadastrar(@RequestBody DadosCadastroCliente dados) {
+	public ResponseEntity<Object> cadastrar(@RequestBody DadosCadastroCliente dados, UriComponentsBuilder uriBuilder) {
 		if (repository.existsByCpf(dados.cpf())) {
-	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("CPF já cadastrado");
-	    }
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente já cadastrado");
+		}
+		var cliente = new Cliente(dados);
+		var uri = uriBuilder.path("cliente/{cpf}").buildAndExpand(cliente.getCpf()).toUri();
 
-	    // Se o CPF não existe, salvar o cliente
-	    repository.save(new Cliente(dados));
-	    return ResponseEntity.status(HttpStatus.CREATED).body("Cliente cadastrado com sucesso");
+		repository.save(cliente);
+
+		return ResponseEntity.created(uri).body(new DadosDetalhamentoCliente(cliente));
 	}
 
 	@GetMapping
-	public Page<DadosListagemClientes> listar(@PageableDefault(size = 10, sort = { "nome" }) Pageable paginacao) {
-		return repository.findAll(paginacao).map(DadosListagemClientes::new);
+	public ResponseEntity<Page<DadosListagemClientes>> listar(
+			@PageableDefault(size = 10, sort = { "nome" }) Pageable paginacao) {
+		var page = repository.findAll(paginacao).map(DadosListagemClientes::new);
+		return ResponseEntity.ok(page);
 	}
 
-	 @PutMapping
-	 @Transactional
-	 public void atualizar(@RequestBody DadosAtualicaoCliente dados) {
-		 var cliente = repository.getReferenceById(dados.cpf());
-		 cliente.atualizarInformacoes(dados);
-	 }
-	 
+	@PutMapping
+	@Transactional
+	public ResponseEntity<DadosDetalhamentoCliente> atualizar(@RequestBody DadosAtualicaoCliente dados) {
+		var cliente = repository.getReferenceById(dados.cpf());
+		cliente.atualizarInformacoes(dados);
+
+		return ResponseEntity.ok(new DadosDetalhamentoCliente(cliente));
+	}
+
+	@DeleteMapping("{cpf}")
+	@Transactional
+	public ResponseEntity<?> excluir(@PathVariable Long cpf) {
+		repository.deleteById(cpf);
+		return ResponseEntity.noContent().build();
+	}
+
+	@GetMapping("{cpf}")
+	public ResponseEntity<DadosDetalhamentoCliente> detalhar(@PathVariable Long cpf) {
+		var cliente = repository.getReferenceById(cpf);
+		return ResponseEntity.ok(new DadosDetalhamentoCliente(cliente));
+	}
+
 }

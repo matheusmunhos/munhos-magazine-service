@@ -10,6 +10,7 @@ public record DadosAtualizacaoProduto(
 		String nome,
 		Double valor,
 		Integer quantidade,
-		String tipoProduto) {
+		String tipoProduto,
+		String codigoProduto) {
 
 }
