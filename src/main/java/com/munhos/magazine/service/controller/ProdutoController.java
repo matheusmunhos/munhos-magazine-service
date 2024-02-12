@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.munhos.magazine.service.produto.DadosAtualizacaoProduto;
-import com.munhos.magazine.service.produto.DadosCadastroProduto;
-import com.munhos.magazine.service.produto.DadosDetalhadamentoProduto;
-import com.munhos.magazine.service.produto.DadosListagemProdutos;
-import com.munhos.magazine.service.produto.Produto;
-import com.munhos.magazine.service.produto.ProdutoRepository;
+import com.munhos.magazine.service.domain.produto.DadosAtualizacaoProduto;
+import com.munhos.magazine.service.domain.produto.DadosCadastroProduto;
+import com.munhos.magazine.service.domain.produto.DadosDetalhadamentoProduto;
+import com.munhos.magazine.service.domain.produto.DadosListagemProdutos;
+import com.munhos.magazine.service.domain.produto.Produto;
+import com.munhos.magazine.service.domain.produto.ProdutoRepository;
 
 import jakarta.transaction.Transactional;
 

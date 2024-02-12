@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.munhos.magazine.service.administrador.DadosAutenticacao;
+import com.munhos.magazine.service.domain.administrador.Administrador;
+import com.munhos.magazine.service.domain.administrador.DadosAutenticacao;
+import com.munhos.magazine.service.infra.security.DadosTokenJWT;
+import com.munhos.magazine.service.infra.security.TokenService;
 
 import jakarta.validation.Valid;
 
@@ -20,13 +23,15 @@ public class AutenticationController {
 	@Autowired
 	private AuthenticationManager manager;
 	
-	
+	@Autowired
+	private TokenService tokenService;
 	
 	@PostMapping
 	public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
-		var token = new UsernamePasswordAuthenticationToken(dados.login(),dados.senha());
-		var authentication = manager.authenticate(token);
+		var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(),dados.senha());
+		var authentication = manager.authenticate(authenticationToken);
+		var tokenJWT = tokenService.gerarToken((Administrador) authentication.getPrincipal());
 		
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
 	}
 }

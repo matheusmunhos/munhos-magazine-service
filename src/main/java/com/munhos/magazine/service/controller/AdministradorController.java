@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.munhos.magazine.service.administrador.Administrador;
-import com.munhos.magazine.service.administrador.AdministradorRepository;
-import com.munhos.magazine.service.administrador.DadosAtualizarAdministrador;
-import com.munhos.magazine.service.administrador.DadosCadastroAdministrador;
-import com.munhos.magazine.service.administrador.DadosListagemAdministrador;
+import com.munhos.magazine.service.domain.administrador.Administrador;
+import com.munhos.magazine.service.domain.administrador.AdministradorRepository;
+import com.munhos.magazine.service.domain.administrador.DadosAtualizarAdministrador;
+import com.munhos.magazine.service.domain.administrador.DadosCadastroAdministrador;
+import com.munhos.magazine.service.domain.administrador.DadosListagemAdministrador;
 
 import jakarta.transaction.Transactional;
 

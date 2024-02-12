@@ -1,4 +1,4 @@
-package com.munhos.magazine.service.produto;
+package com.munhos.magazine.service.domain.produto;
 
 import jakarta.validation.constraints.NotNull;
 

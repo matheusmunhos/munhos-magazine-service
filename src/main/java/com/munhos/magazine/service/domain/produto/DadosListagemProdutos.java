@@ -1,4 +1,4 @@
-package com.munhos.magazine.service.produto;
+package com.munhos.magazine.service.domain.produto;
 
 public record DadosListagemProdutos(String nome,Integer quantidade,Double valor,String tipoProduto, Long id, String codigoProduto) {
 

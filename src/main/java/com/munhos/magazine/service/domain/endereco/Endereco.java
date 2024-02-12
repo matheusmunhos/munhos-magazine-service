@@ -1,4 +1,4 @@
-package com.munhos.magazine.service.endereco;
+package com.munhos.magazine.service.domain.endereco;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

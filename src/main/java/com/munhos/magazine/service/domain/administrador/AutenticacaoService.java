@@ -1,4 +1,4 @@
-package com.munhos.magazine.service.administrador;
+package com.munhos.magazine.service.domain.administrador;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

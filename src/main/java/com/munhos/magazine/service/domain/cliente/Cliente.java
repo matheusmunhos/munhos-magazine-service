@@ -1,6 +1,6 @@
-package com.munhos.magazine.service.cliente;
+package com.munhos.magazine.service.domain.cliente;
 
-import com.munhos.magazine.service.endereco.Endereco;
+import com.munhos.magazine.service.domain.endereco.Endereco;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

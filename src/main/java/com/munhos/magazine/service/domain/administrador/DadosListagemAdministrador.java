@@ -1,4 +1,4 @@
-package com.munhos.magazine.service.administrador;
+package com.munhos.magazine.service.domain.administrador;
 
 public record DadosListagemAdministrador(Long id,String nome, String email, String senha, String cpf) {
 

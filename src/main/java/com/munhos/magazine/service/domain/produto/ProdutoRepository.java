@@ -1,4 +1,4 @@
-package com.munhos.magazine.service.produto;
+package com.munhos.magazine.service.domain.produto;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +11,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
 	boolean existsByCodigoProduto(String codigoProduto);
 
-	Object getReferenceByCodigoProduto(String codigoProduto);
+	Produto getReferenceByCodigoProduto(String codigoProduto);
 
 	
 

@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.munhos.magazine.service.cliente.Cliente;
-import com.munhos.magazine.service.cliente.ClienteRepository;
-import com.munhos.magazine.service.cliente.DadosAtualicaoCliente;
-import com.munhos.magazine.service.cliente.DadosCadastroCliente;
-import com.munhos.magazine.service.cliente.DadosDetalhamentoCliente;
-import com.munhos.magazine.service.cliente.DadosListagemClientes;
+import com.munhos.magazine.service.domain.cliente.Cliente;
+import com.munhos.magazine.service.domain.cliente.ClienteRepository;
+import com.munhos.magazine.service.domain.cliente.DadosAtualicaoCliente;
+import com.munhos.magazine.service.domain.cliente.DadosCadastroCliente;
+import com.munhos.magazine.service.domain.cliente.DadosDetalhamentoCliente;
+import com.munhos.magazine.service.domain.cliente.DadosListagemClientes;
 
 import jakarta.transaction.Transactional;
 
@@ -48,6 +48,8 @@ public class ClienteController {
 
 	@GetMapping
 	public ResponseEntity<Page<DadosListagemClientes>> listar(
+			
+			
 			@PageableDefault(size = 10, sort = { "nome" }) Pageable paginacao) {
 		var page = repository.findAll(paginacao).map(DadosListagemClientes::new);
 		return ResponseEntity.ok(page);

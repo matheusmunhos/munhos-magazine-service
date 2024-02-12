@@ -1,4 +1,4 @@
-package com.munhos.magazine.service.administrador;
+package com.munhos.magazine.service.domain.administrador;
 
 import java.util.Collection;
 import java.util.List;

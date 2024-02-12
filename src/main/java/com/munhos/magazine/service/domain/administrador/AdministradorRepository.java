@@ -1,4 +1,4 @@
-package com.munhos.magazine.service.administrador;
+package com.munhos.magazine.service.domain.administrador;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
