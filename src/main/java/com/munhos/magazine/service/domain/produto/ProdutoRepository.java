@@ -13,7 +13,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
 	Produto getReferenceByCodigoProduto(String codigoProduto);
 
-	
+	Produto findByCodigoProduto(String codigoProduto);
 
 
 }

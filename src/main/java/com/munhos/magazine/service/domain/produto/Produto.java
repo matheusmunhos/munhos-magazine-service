@@ -1,6 +1,9 @@
 package com.munhos.magazine.service.domain.produto;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+
+import com.munhos.magazine.service.domain.venda.DadosVenda;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +23,9 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = "id")
 public class Produto {
 
+	
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -98,9 +104,11 @@ public class Produto {
 		if (dados.codigoProduto() != null) {
 			this.codigoProduto = dados.codigoProduto();
 		}
-		
+
 		return ResponseEntity.ok("");
 
 	}
+
+	
 
 }

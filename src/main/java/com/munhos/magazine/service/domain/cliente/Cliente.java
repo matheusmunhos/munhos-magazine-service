@@ -1,6 +1,9 @@
 package com.munhos.magazine.service.domain.cliente;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.munhos.magazine.service.domain.endereco.Endereco;
+import com.munhos.magazine.service.domain.venda.DadosVenda;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -16,6 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Cliente {
 
+	
 	@Id
 	private Long cpf;
 
@@ -49,4 +53,5 @@ public class Cliente {
 	
 
 	}
+	
 }

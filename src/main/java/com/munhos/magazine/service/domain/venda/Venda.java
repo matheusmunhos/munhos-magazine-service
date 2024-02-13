@@ -41,14 +41,14 @@ public class Venda {
 	private Double valor;
 	private LocalDateTime data;
 	
-//	public Venda(Long id, Object produto, Object cliente, LocalDateTime data,Double valor) {
-//		
-//		this.id = id;
-//		this.produto = (Produto) produto;
-//		this.cliente = (Cliente) cliente;
-//		this.valor = valor;
-//		this.data = data;
-//	}
+	public Venda(Long id, Produto produto, Cliente cliente, LocalDateTime data,Double valor) {
+		
+		this.id = id;
+		this.produto = produto;
+		this.cliente = cliente;
+		this.valor = valor;
+		this.data = data;
+	}
 	
 	
 	

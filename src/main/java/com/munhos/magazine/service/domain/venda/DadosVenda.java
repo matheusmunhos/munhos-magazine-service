@@ -17,6 +17,9 @@ public record DadosVenda(
 		Double valor,
 		
 		@NotNull
+		Integer quantidade,
+		
+		@NotNull
 		
 		LocalDateTime data) {
 
