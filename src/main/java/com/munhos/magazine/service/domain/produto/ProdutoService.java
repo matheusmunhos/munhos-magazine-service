@@ -16,4 +16,8 @@ public class ProdutoService {
     public Produto obterProdutoPorCodigo(String codigoProduto) {
         return produtoRepository.findByCodigoProduto(codigoProduto);
     }
+    public int obterQuantidadePorCodigo(String codigoProduto) {
+        Produto produto = produtoRepository.findByCodigoProduto(codigoProduto);
+        return produto != null ? produto.getQuantidade() : 0;
+    }
 }

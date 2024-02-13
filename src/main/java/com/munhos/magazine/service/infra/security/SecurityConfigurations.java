@@ -42,5 +42,6 @@ public class SecurityConfigurations {
 	public PasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+	  
+
 }

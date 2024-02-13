@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,40 +32,46 @@ public class AdministradorController {
 	@Autowired
 	AdministradorRepository repository;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	@PostMapping
 	@Transactional
 	public ResponseEntity<?> cadastrar(@RequestBody DadosCadastroAdministrador dados) {
-		
+
 		if (repository.existsByEmail(dados.email())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Administrador já cadastrado");
 		}
-		
+
+		String senha = passwordEncoder.encode(dados.senha());
+
 		var administrador = new Administrador(dados);
+		administrador.setSenha(senha);
+
 		repository.save(administrador);
+
 		return ResponseEntity.ok(new Administrador(dados));
-		
+
 	}
-	
-	
+
 	@GetMapping
 	public ResponseEntity<Page<DadosListagemAdministrador>> listar(
 			@PageableDefault(size = 10, sort = { "nome" }) Pageable paginacao) {
 		var page = repository.findAll(paginacao).map(DadosListagemAdministrador::new);
 		return ResponseEntity.ok(page);
 	}
-	
+
 	@PutMapping
 	@Transactional
-	public void atualizar (@RequestBody DadosAtualizarAdministrador dados) {
+	public void atualizar(@RequestBody DadosAtualizarAdministrador dados) {
 		var administrador = repository.getReferenceById(dados.id());
 		administrador.atualizarInformacoes(dados);
 	}
-	
+
 	@DeleteMapping("{id}")
 	@Transactional
 	public void excluir(@PathVariable Long id) {
 		repository.deleteById(id);
 	}
-	
-	
+
 }

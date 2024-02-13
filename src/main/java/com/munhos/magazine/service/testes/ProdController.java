@@ -24,4 +24,8 @@ public class ProdController {
     public Produto obterProdutoPorCodigo(@PathVariable String codigoProduto) {
         return produtoService.obterProdutoPorCodigo(codigoProduto);
     }
+    @GetMapping("/teste/{codigoProduto}")
+    public int obterQuantidade(@PathVariable String codigoProduto) {
+        return produtoService.obterQuantidadePorCodigo(codigoProduto);
+    }
 }
