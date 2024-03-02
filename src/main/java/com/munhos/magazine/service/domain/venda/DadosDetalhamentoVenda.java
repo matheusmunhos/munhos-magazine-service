@@ -8,4 +8,6 @@ public record DadosDetalhamentoVenda(Long id, String codigoProduto, Long cliente
 
 		LocalDateTime data, Double valor) {
 
+	
+	
 }

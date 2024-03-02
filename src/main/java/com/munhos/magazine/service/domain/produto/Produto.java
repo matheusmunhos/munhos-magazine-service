@@ -1,9 +1,8 @@
 package com.munhos.magazine.service.domain.produto;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
-import com.munhos.magazine.service.domain.venda.DadosVenda;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Table(name = "produtos")
 @Entity(name = "Produto")
@@ -21,13 +21,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@ToString
 public class Produto {
 
 	
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String nome;
@@ -38,6 +39,7 @@ public class Produto {
 	private String codigoProduto;
 
 	public Produto(DadosCadastroProduto dados) {
+		this.id = dados.id();
 		this.ativo = true;
 		this.nome = dados.nome();
 		this.valor = dados.valor();
@@ -51,18 +53,14 @@ public class Produto {
 		if (dados.nome() != null) {
 			this.nome = dados.nome();
 		}
-		if (dados.quantidade() != null) {
-			this.quantidade = dados.quantidade();
-		}
+		
 		if (dados.valor() != null) {
 			this.valor = dados.valor();
 		}
 		if (dados.tipoProduto() != null) {
 			this.tipoProduto = dados.tipoProduto();
 		}
-		if (dados.codigoProduto() != null) {
-			this.codigoProduto = dados.codigoProduto();
-		}
+		
 
 	}
 
@@ -92,18 +90,14 @@ public class Produto {
 		if (dados.nome() != null) {
 			this.nome = dados.nome();
 		}
-		if (dados.quantidade() != null) {
-			this.quantidade = dados.quantidade();
-		}
+		
 		if (dados.valor() != null) {
 			this.valor = dados.valor();
 		}
 		if (dados.tipoProduto() != null) {
 			this.tipoProduto = dados.tipoProduto();
 		}
-		if (dados.codigoProduto() != null) {
-			this.codigoProduto = dados.codigoProduto();
-		}
+		
 
 		return ResponseEntity.ok("");
 

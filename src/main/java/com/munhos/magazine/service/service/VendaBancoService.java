@@ -1,9 +1,12 @@
 package com.munhos.magazine.service.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.munhos.magazine.service.domain.venda.Venda;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -36,4 +39,14 @@ public class VendaBancoService {
         
         
     }
+    
+    public List<?> listarTodasAsVendas() {
+        String jpql = "SELECT v FROM Venda v";
+        return entityManager.createQuery(jpql, Venda.class)
+            .getResultList();
+    }
+    
+    
+    
+    
 }

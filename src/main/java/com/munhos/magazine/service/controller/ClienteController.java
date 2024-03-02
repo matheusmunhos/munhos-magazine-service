@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,7 @@ public class ClienteController {
 	@Autowired
 	ClienteRepository repository;
 
+	@CrossOrigin(origins = "*")
 	@PostMapping
 	@Transactional
 	public ResponseEntity<Object> cadastrar(@RequestBody DadosCadastroCliente dados, UriComponentsBuilder uriBuilder) {
@@ -46,15 +48,16 @@ public class ClienteController {
 		return ResponseEntity.created(uri).body(new DadosDetalhamentoCliente(cliente));
 	}
 
+	@CrossOrigin(origins = "*")
 	@GetMapping
 	public ResponseEntity<Page<DadosListagemClientes>> listar(
 			
-			
-			@PageableDefault(size = 10, sort = { "nome" }) Pageable paginacao) {
+			@PageableDefault(size = 100000, sort = { "nome" }) Pageable paginacao) {
 		var page = repository.findAll(paginacao).map(DadosListagemClientes::new);
 		return ResponseEntity.ok(page);
 	}
 
+	@CrossOrigin(origins = "*")
 	@PutMapping
 	@Transactional
 	public ResponseEntity<DadosDetalhamentoCliente> atualizar(@RequestBody DadosAtualicaoCliente dados) {
@@ -64,6 +67,7 @@ public class ClienteController {
 		return ResponseEntity.ok(new DadosDetalhamentoCliente(cliente));
 	}
 
+	@CrossOrigin(origins = "*")
 	@DeleteMapping("{cpf}")
 	@Transactional
 	public ResponseEntity<?> excluir(@PathVariable Long cpf) {
@@ -71,6 +75,7 @@ public class ClienteController {
 		return ResponseEntity.noContent().build();
 	}
 
+	@CrossOrigin(origins = "*")
 	@GetMapping("{cpf}")
 	public ResponseEntity<DadosDetalhamentoCliente> detalhar(@PathVariable Long cpf) {
 		var cliente = repository.getReferenceById(cpf);

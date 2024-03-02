@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +38,7 @@ public class AdministradorController {
 
 	@PostMapping
 	@Transactional
+	@CrossOrigin(origins = "*")
 	public ResponseEntity<?> cadastrar(@RequestBody DadosCadastroAdministrador dados) {
 
 		if (repository.existsByEmail(dados.email())) {
@@ -54,15 +56,17 @@ public class AdministradorController {
 
 	}
 
+	@CrossOrigin(origins = "*")
 	@GetMapping
 	public ResponseEntity<Page<DadosListagemAdministrador>> listar(
-			@PageableDefault(size = 10, sort = { "nome" }) Pageable paginacao) {
+			@PageableDefault(size = 1000000, sort = { "nome" }) Pageable paginacao) {
 		var page = repository.findAll(paginacao).map(DadosListagemAdministrador::new);
 		return ResponseEntity.ok(page);
 	}
 
 	@PutMapping
 	@Transactional
+	@CrossOrigin(origins = "*")
 	public void atualizar(@RequestBody DadosAtualizarAdministrador dados) {
 		var administrador = repository.getReferenceById(dados.id());
 		administrador.atualizarInformacoes(dados);
@@ -70,6 +74,7 @@ public class AdministradorController {
 
 	@DeleteMapping("{id}")
 	@Transactional
+	@CrossOrigin(origins = "*")
 	public void excluir(@PathVariable Long id) {
 		repository.deleteById(id);
 	}

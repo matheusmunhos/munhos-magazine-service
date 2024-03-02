@@ -1,7 +1,9 @@
 package com.munhos.magazine.service.domain.venda;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.munhos.magazine.service.domain.cliente.Cliente;
 import com.munhos.magazine.service.domain.produto.Produto;
 
@@ -24,7 +26,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Venda {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
+public class Venda implements Serializable {
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +44,12 @@ public class Venda {
 	private Cliente cliente;
 	
 	private Double valor;
+	private Integer quantidade;
 	private LocalDateTime data;
+	
+	
+	
+	   
 	
 	public Venda(Long id, Produto produto, Cliente cliente, LocalDateTime data,Double valor) {
 		

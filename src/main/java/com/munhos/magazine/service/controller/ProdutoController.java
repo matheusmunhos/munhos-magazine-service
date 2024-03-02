@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +38,7 @@ public class ProdutoController {
 	@Autowired
 	ProdutoService produtoService;
 
+	@CrossOrigin(origins = "*")
 	@PostMapping
 	@Transactional
 	public ResponseEntity<Object> cadastrar(@RequestBody DadosCadastroProduto dados, UriComponentsBuilder uriBuilder) {
@@ -52,11 +54,13 @@ public class ProdutoController {
 		return ResponseEntity.created(uri).body(new DadosDetalhadamentoProduto(produto));
 	}
 
+	@CrossOrigin(origins = "*")
 	@GetMapping
-	public Page<DadosListagemProdutos> listar(@PageableDefault(size = 10, sort = { "nome" }) Pageable paginacao) {
+	public Page<DadosListagemProdutos> listar(@PageableDefault(size = 100000, sort = { "nome" }) Pageable paginacao) {
 		return repository.findAllByAtivoTrue(paginacao).map(DadosListagemProdutos::new);
 	}
 
+	@CrossOrigin(origins = "*")
 	@PutMapping("/atualizar{cdProduto}")
 	@Transactional
 	public ResponseEntity<String> atualizar(@RequestParam String cdProduto,
@@ -64,10 +68,12 @@ public class ProdutoController {
 
 		var produto = repository.getReferenceByCodigoProduto(cdProduto);
 		((Produto) produto).atualizar(dados);
+		
 
 		return ResponseEntity.ok("Produto atualizado com sucesso com sucesso!");
 	}
 
+	@CrossOrigin(origins = "*")
 	@DeleteMapping("/{id}")
 	@Transactional
 	public void excluir(@PathVariable Long id) {
@@ -76,12 +82,14 @@ public class ProdutoController {
 
 	}
 
+	@CrossOrigin(origins = "*")
 	@GetMapping("{codigoProduto}")
 	public ResponseEntity<DadosDetalhadamentoProduto> detalhar(@PathVariable String codigoProduto) {
 		var produto = repository.getReferenceByCodigoProduto(codigoProduto);
 		return ResponseEntity.ok(new DadosDetalhadamentoProduto(produto));
 	}
 
+	@CrossOrigin(origins = "*")
 	@PutMapping("/vender")
 	@Transactional
 	public ResponseEntity<String> venderProduto(@RequestParam String cdproduto, @RequestParam Integer quantidade) {
@@ -92,6 +100,7 @@ public class ProdutoController {
 		return ResponseEntity.ok("Venda realizada com sucesso!");
 	}
 
+	@CrossOrigin(origins = "*")
 	@PutMapping("/repor")
 	@Transactional
 	public ResponseEntity<String> reporProduto(@RequestParam String cdproduto, @RequestParam Integer quantidade) {

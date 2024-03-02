@@ -1,9 +1,7 @@
 package com.munhos.magazine.service.domain.cliente;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.munhos.magazine.service.domain.endereco.Endereco;
-import com.munhos.magazine.service.domain.venda.DadosVenda;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -11,12 +9,15 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Table(name = "clientes")
 @Entity(name = "Cliente")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@ToString
 public class Cliente {
 
 	
