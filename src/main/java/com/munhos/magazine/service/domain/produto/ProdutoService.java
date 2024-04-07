@@ -8,8 +8,8 @@ public class ProdutoService {
 
     private final ProdutoRepository produtoRepository;
 
-    @Autowired
     public ProdutoService(ProdutoRepository produtoRepository) {
+
         this.produtoRepository = produtoRepository;
     }
 

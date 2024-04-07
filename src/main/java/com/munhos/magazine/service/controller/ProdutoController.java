@@ -65,7 +65,6 @@ public class ProdutoController {
 	@Transactional
 	public ResponseEntity<String> atualizar(@RequestParam String cdProduto,
 			@RequestBody DadosAtualizacaoProduto dados) {
-
 		var produto = repository.getReferenceByCodigoProduto(cdProduto);
 		((Produto) produto).atualizar(dados);
 		

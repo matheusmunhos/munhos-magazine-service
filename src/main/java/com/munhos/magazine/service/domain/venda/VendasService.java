@@ -1,5 +1,7 @@
 package com.munhos.magazine.service.domain.venda;
 
+import com.munhos.magazine.service.domain.venda.exception.ProdutoForaDeEstoqueException;
+import com.munhos.magazine.service.domain.venda.exception.QuantidadeMaiorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +22,19 @@ public class VendasService {
 
 	public void vender(DadosVenda dados) {
 		int quantidade =produtoService.obterQuantidadePorCodigo(dados.codigoProduto());
-		
-		if(quantidade < dados.quantidade()) {
-			throw new RuntimeException("Produto fora de estoque");
+
+
+		if (quantidade == 0){
+			throw new ProdutoForaDeEstoqueException();
 		}
-		
-		classeDeServico.salvarVenda(dados.clienteCpf(), dados.data(), dados.codigoProduto(), dados.valor(), dados.quantidade());
+
+		if(quantidade < dados.quantidade()) {
+			throw new QuantidadeMaiorException();
+		} else {
+			classeDeServico.salvarVenda(dados.clienteCpf(), dados.data(), dados.codigoProduto(), dados.valor(), dados.quantidade());
+		}
+
+
 	}
 	
 	
