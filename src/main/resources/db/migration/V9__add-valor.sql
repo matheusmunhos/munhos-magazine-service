@@ -1,0 +1,2 @@
+ALTER TABLE vendas
+ADD COLUMN valor DOUBLE;
