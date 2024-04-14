@@ -37,7 +37,6 @@ public class VendasController {
 	@Transactional
 	public ResponseEntity vender(@RequestBody DadosVenda dados) {
 		venda.vender(dados);
-
 		return ResponseEntity.ok(new DadosDetalhamentoVenda(null, null, null, null, null));
 	}
 
