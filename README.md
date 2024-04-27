@@ -101,7 +101,46 @@ Serviço de gerenciamento e controle de vendas e entradas de um comércio
 |   [Json](https://frequent-flute-9c9.notion.site/API-Reference-55b45a1efa2d4fc7822ec8fb28785112?pvs=4)    | `Json` | **Atualiza** os dados do cliente |
 
 
+#### Deleta o cliente pelo seu CPF
 
+```http
+  DELETE /cliente/{cpf}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `CPF`      |  | **Deleta** o cliente a partir de seu CPF |
+
+#### Detalha os dados do cliente
+
+```http
+  GET /cliente/{cpf}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `CPF`      |  | **Detalha** os dados do cliente |
+
+
+#### Realizar vendas
+
+```http
+  POST /vendas
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+|  [Json](https://frequent-flute-9c9.notion.site/API-Reference-55b45a1efa2d4fc7822ec8fb28785112?pvs=4)     |  json| **Realiza a venda** do produto para o cliente |
+
+#### Listas vendas
+
+```http
+  GET /vendas
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+|      |  Lista de vendas <Json>| **Retorna todas** as vendas |
 
 
 
@@ -110,3 +149,8 @@ Serviço de gerenciamento e controle de vendas e entradas de um comércio
 
 
 **Back-end:** Java 17, Flyway e MySql
+
+## Suporte
+
+Para suporte, mande um email para munhosdev@gmail.com
+
