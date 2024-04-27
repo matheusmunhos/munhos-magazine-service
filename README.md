@@ -32,18 +32,24 @@ Serviço de gerenciamento e controle de vendas e entradas de um comércio
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `id`      | `string` | **Obrigatório**. O ID do item que você quer deletar |
+| `id do produto`      | `json` | **Obrigatório**. O ID do item que você quer deletar |
 
 
-POST /produto/
+```http
+  POST /produto/
+```
 
-| Parâmetro                                       | Tipo       | Descrição                                   |
-| :---------------------------------------------- | :--------- | :------------------------------------------ |
-| ```json {"id":"76655","nome":"Armario","valor":"1200.0","quantidade":"10","tipoProduto":"Sofa de 3 lugares","codigoProduto":"76655"}```   | `string`   | JSON contendo os detalhes do produto.      |
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| [Json](https://frequent-flute-9c9.notion.site/API-Reference-55b45a1efa2d4fc7822ec8fb28785112?pvs=4)      | `json` | **Cadastro do produto**. |
+
+
+
+
 
 
 ## Stack utilizada
 
 
-**Back-end:** Java 17, FlyWay e MySql
 
+**Back-end:** Java 17, Flyway e MySql
